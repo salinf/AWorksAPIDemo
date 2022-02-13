@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using AWorksAPIDemo.ORM;
+using Microsoft.EntityFrameworkCore;
+
 namespace AWorksAPIDemo
 {
     public class Startup
@@ -26,7 +29,9 @@ namespace AWorksAPIDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddDbContext<AdventureWorksContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AWConnection")));            
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -52,10 +57,10 @@ namespace AWorksAPIDemo
 
             app.UseEndpoints(endpoints =>
             {
-               endpoints.MapControllerRoute(
-               name: "default",
-               pattern: "{controller=Test}/{action=test}/{id?}");
-                // default scafolded endpoints.MapControllers();
+               //endpoints.MapControllerRoute(
+               //name: "default",
+               //pattern: "{controller=Test}/{action=test}/{id?}");
+               endpoints.MapControllers();
             });
         }
     }

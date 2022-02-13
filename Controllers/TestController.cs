@@ -5,16 +5,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using AWorksAPIDemo.ORM;
+
 namespace AWorksAPIDemo.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]/[action]/{id?}")]
     [ApiController]
     public class TestController : ControllerBase
     {
-        [HttpGet]
-        public int Get (int id)
+        private readonly AdventureWorksContext _dbcontext;
+        public TestController (AdventureWorksContext context)
         {
-            return id;
+            _dbcontext = context;
+        }
+
+        [HttpGet]
+        public string Get (int id)
+        {
+            var aTest = _dbcontext.Test456.ToList();
+            string theResult = String.Empty;
+
+            if (aTest.Count > 0)
+            {
+                theResult = aTest[id].another;
+            }
+            return theResult;
         }
 
         [HttpGet]
