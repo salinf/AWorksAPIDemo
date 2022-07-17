@@ -7,23 +7,21 @@ using System.Threading.Tasks;
 using AWorksDataModels;
 using AWorksAPIDemo.ORM;
 
-namespace AWorksAPIDemo.Controllers
+namespace AWorksAPI.Controllers
 {
-    [Route("api/[controller]/[action]/{id?}")]
+    
     [ApiController]
-    public class AddressController : ControllerBase
+    public class AddressController : GenericApiController<Address, int> 
     {
-        private readonly AdventureWorksContext _dbcontext;
-        public AddressController(AdventureWorksContext context)
-        {
-            _dbcontext = context;
-        }
+        //private readonly AdventureWorksContext _dbcontext;
+        public AddressController(AdventureWorksContext context) : base(context)
+        {}
 
-        [HttpGet]
-        public Address Get(int id)
-        {
-            Address a = _dbcontext.Address.Find(id);
-            return a;
-        }
+        //[HttpGet]
+        //public Address Get(int id)
+        //{
+        //    Address a = _dbcontext.Address.Find(id);
+        //    return a;
+        //}
     }
 }

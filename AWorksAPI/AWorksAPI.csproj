@@ -14,4 +14,8 @@
     <ProjectReference Include="..\AWorksDataModels\AWorksDataModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ORM\Entities\" />
+  </ItemGroup>
+
 </Project>

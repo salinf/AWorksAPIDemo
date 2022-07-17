@@ -23,8 +23,15 @@ namespace AWorksAPIDemo.ORM
         {
             //Person was configured with data annotations to have an example of how to do it that way
             //
+
             modelBuilder.Entity<Address>().ToTable("Address", schema: "Person")
                 .HasKey(k => k.AddressID);
+
+            modelBuilder.Entity<Address>().ToTable("Address", schema: "Person")
+                .Property(b => b.AddressID)
+                .ValueGeneratedOnAdd();
+               
+                
                 //.HasMany(c => c.Instructors)
                 //.WithMany(i => i.Courses);
            
