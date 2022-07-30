@@ -17,7 +17,9 @@ namespace AWorksAPIDemo.ORM
         public DbSet<test456> Test456 { get; set; }
         public DbSet<Person> Person { get; set; }
         public DbSet<Address> Address { get; set; }
-       
+
+        public DbSet<AddressType> AddressType { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,11 +32,13 @@ namespace AWorksAPIDemo.ORM
             modelBuilder.Entity<Address>().ToTable("Address", schema: "Person")
                 .Property(b => b.AddressID)
                 .ValueGeneratedOnAdd();
-               
-                
-                //.HasMany(c => c.Instructors)
-                //.WithMany(i => i.Courses);
-           
+            
+            modelBuilder.Entity<AddressType>().ToTable("AddressType", schema: "Person")
+               .HasKey(k => k.AddressTypeID);
+
+            //.HasMany(c => c.Instructors)
+            //.WithMany(i => i.Courses);
+
         }
     }
 }

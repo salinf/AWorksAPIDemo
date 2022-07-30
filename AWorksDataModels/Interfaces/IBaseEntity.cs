@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace AWorksDataModels
 {
     public interface IBaseEntity<out T>
-    {
-        public int entityKey { get; set; }
+    {        
+        public DateTime? ModifiedDate { get; set; }
         public T GetKey(string encodedKey);
-
+        
     }
 }

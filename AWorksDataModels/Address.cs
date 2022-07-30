@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace AWorksDataModels
 {
     
-    public class Address : IBaseEntity<int>
+    public class Address : IBaseEntity<int>, IPersonType
     {
         private Guid _rowGuid;
 
@@ -32,8 +32,7 @@ namespace AWorksDataModels
             }
             set { _rowGuid = value; } 
         }
-        public DateTime? ModifiedDate { get; set; }
-        public int entityKey { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }      
+        public DateTime? ModifiedDate { get; set; }        
 
         public int GetKey(string encodedKey)
         {

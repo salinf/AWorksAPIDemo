@@ -26,7 +26,7 @@ namespace AWorksAPI.Controllers
 
         [HttpGet("{id?}")]
         public IActionResult Get(int id)
-        {
+        {            
             string test = id.ToString().EncodeBase64();
             
             return Ok(_dbset.Find(id));

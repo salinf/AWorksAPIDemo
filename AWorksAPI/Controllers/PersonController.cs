@@ -49,6 +49,20 @@ namespace AWorksAPIDemo.Controllers
         public Person Put(Person person)
         {
             var p = _dbcontext.Person.Update(person);
+
+            try
+            {
+                Person q = _dbcontext.Person.Find(30780);
+                q.FirstName = null;
+                q.MiddleName = "test";
+                var r = _dbcontext.Person.Update(q);
+            }
+            catch (Exception)
+            {
+
+                
+            }
+            
             _dbcontext.SaveChanges();
 
             return p.Entity;
