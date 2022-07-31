@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 using AWorksDataModels;
 using AWorksAPIDemo.ORM;
-using AWorksAPI.ExtensionMethods;
+//using AWorksAPI.ExtensionMethods;
+using AWorksDataModels.ClassExtensions;
 using System.Net;
 using System.Net.Http;
 
@@ -32,14 +33,17 @@ namespace AWorksAPI.Controllers
             return Ok(_dbset.Find(id));
         }
 
-        [HttpGet("{id?}")]
+        [HttpGet("test/{id?}")]
         public IActionResult Get2(string encodedId)
-        {            
-            return Ok(_dbset.Find());
+        {
+            int t2 = 2;
+            encodedId = t2.ToString().EncodeBase64();
+            TKey key = encodedId.DecodeBase64<TKey>();
+            return Ok(_dbset.Find(key));
         }
 
         [HttpPut]
-        public IActionResult Put(TEntity entity)
+        public IActionResult Put([FromBody]TEntity entity)
         {
             try
             {
@@ -56,7 +60,7 @@ namespace AWorksAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(TEntity entity)
+        public IActionResult Post([FromBody]TEntity entity)
         {
             try
             {

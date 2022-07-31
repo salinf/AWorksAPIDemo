@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace AWorksAPI.ExtensionMethods
+namespace AWorksDataModels.ClassExtensions
 {
     public static class StringUtility
     {
@@ -13,25 +16,14 @@ namespace AWorksAPI.ExtensionMethods
 
         public static string DecodeBase64(this string value)
         {
-            var valueBytes = System.Convert.FromBase64String(value);            
+            var valueBytes = System.Convert.FromBase64String(value);
             return Encoding.UTF8.GetString(valueBytes);
         }
 
         public static T DecodeBase64<T>(this string value)
         {
-            var valueBytes = System.Convert.FromBase64String(value);            
+            var valueBytes = System.Convert.FromBase64String(value);
             return (T)Convert.ChangeType(valueBytes, typeof(T));
         }
-
-        //private static object yesHaveSome(Type aType)
-        //{
-        //    switch (aType.Name)
-        //    {
-        //        case "Int":
-
-        //        default:
-        //            break;
-        //    }
-        //}
     }
 }

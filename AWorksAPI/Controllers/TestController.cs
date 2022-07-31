@@ -41,7 +41,7 @@ namespace AWorksAPIDemo.Controllers
             switch (id)
             {
                 case 1:
-                    ret = "Suckcess";
+                    ret = "it works";
                     break;
                 case 2:
                     ret = "Too";

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AWorksDataModels.ClassExtensions;
+
 namespace AWorksDataModels
 {
     
@@ -37,7 +39,7 @@ namespace AWorksDataModels
         public int GetKey(string encodedKey)
         {
             int x = 0;
-            int.TryParse(encodedKey, out x);
+            int.TryParse(encodedKey.DecodeBase64(), out x);
             return x;
         }
     }

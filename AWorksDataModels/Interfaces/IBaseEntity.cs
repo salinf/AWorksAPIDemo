@@ -9,7 +9,7 @@ namespace AWorksDataModels
     public interface IBaseEntity<out T>
     {        
         public DateTime? ModifiedDate { get; set; }
-        public T GetKey(string encodedKey);
-        
+        public T GetKey(string encodedKey);        
+
     }
 }
