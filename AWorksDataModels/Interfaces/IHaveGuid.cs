@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AWorksDataModels
 {
-    public interface IPersonType
+    public interface IHaveGuid
     {
         public Guid rowguid { get; set; }
     }

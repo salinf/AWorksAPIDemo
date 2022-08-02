@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace AWorksDataModels
 {
-    public class AddressType : IBaseEntity<int>, IPersonType
+    public class AddressType : IBaseEntity<int>, IHaveGuid
     {
         private Guid _rowGuid;
         public int AddressTypeID { get; set; }
         public string Name { get; set; }
-        public DateTime? ModifiedDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime? ModifiedDate { get; set; }
         public Guid rowguid 
         {
             get
@@ -24,7 +24,7 @@ namespace AWorksDataModels
             }
             set { _rowGuid = value; }
         }
-
+        public Type KeyType { get; init; }
         public int GetKey(string encodedKey)
         {
             throw new NotImplementedException();

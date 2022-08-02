@@ -11,9 +11,13 @@ using AWorksDataModels.ClassExtensions;
 namespace AWorksDataModels
 {
     
-    public class Address : IBaseEntity<int>, IPersonType
+    public class Address : IBaseEntity<int>, IHaveGuid
     {
         private Guid _rowGuid;
+        public Address()
+        {
+            //KeyType = typeof(int);
+        }
 
         public int AddressID { get; set; }
         public string AddressLine1 { get; set; }
@@ -34,12 +38,13 @@ namespace AWorksDataModels
             }
             set { _rowGuid = value; } 
         }
-        public DateTime? ModifiedDate { get; set; }        
+        public DateTime? ModifiedDate { get; set; }
+        public Type KeyType { get; init; }
 
         public int GetKey(string encodedKey)
         {
             int x = 0;
-            int.TryParse(encodedKey.DecodeBase64(), out x);
+            int.TryParse(encodedKey.DecodeBase64Url(), out x);
             return x;
         }
     }

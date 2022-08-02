@@ -15,7 +15,7 @@ using System.Net.Http;
 namespace AWorksAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class GenericApiController<TEntity, TKey> : ControllerBase where TEntity: class, IBaseEntity<int>, new()
+    public class GenericApiController<TEntity, TKey> : ControllerBase where TEntity : class, IBaseEntity<int>, new()
     {
         private readonly AdventureWorksContext _context;
         private readonly DbSet<TEntity> _dbset;
@@ -28,17 +28,16 @@ namespace AWorksAPI.Controllers
         [HttpGet("{id?}")]
         public IActionResult Get(int id)
         {            
-            string test = id.ToString().EncodeBase64();
-            
             return Ok(_dbset.Find(id));
         }
 
-        [HttpGet("test/{id?}")]
-        public IActionResult Get2(string encodedId)
+        [HttpGet("{encodedId?}")]
+        public IActionResult CompositeGet(string encodedId)
         {
             int t2 = 2;
-            encodedId = t2.ToString().EncodeBase64();
-            TKey key = encodedId.DecodeBase64<TKey>();
+            encodedId = t2.ToString().EncodeBase64Url();
+            TEntity entity = new();
+            var key = entity.GetKey(encodedId);
             return Ok(_dbset.Find(key));
         }
 

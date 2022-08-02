@@ -25,5 +25,15 @@ namespace AWorksDataModels.ClassExtensions
             var valueBytes = System.Convert.FromBase64String(value);
             return (T)Convert.ChangeType(valueBytes, typeof(T));
         }
+        public static string EncodeBase64Url(this string value)
+        {
+            var valueBytes = Encoding.UTF8.GetBytes(value);
+            return Convert.ToBase64String(valueBytes).Replace("-", "/").Replace("_", "+").Replace("=", "!");
+        }
+        public static string DecodeBase64Url(this string value)
+        {
+            var valueBytes = Encoding.UTF8.GetBytes(value);
+            return Convert.ToBase64String(valueBytes).Replace("/", "-").Replace("+", "_").Replace("!", "=");
+        }
     }
 }
