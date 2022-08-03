@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace AWorksDataModels
 {
-    public class AddressType : IBaseEntity<int>, IHaveGuid
+    public class AddressType : IBaseEntity, IHaveGuid
     {
+        public AddressType()
+        {
+            //KeyType = typeof(int);
+            IsComplexType = false;
+        }
+
         private Guid _rowGuid;
         public int AddressTypeID { get; set; }
         public string Name { get; set; }
@@ -23,11 +29,7 @@ namespace AWorksDataModels
                 return _rowGuid;
             }
             set { _rowGuid = value; }
-        }
-        public Type KeyType { get; init; }
-        public int GetKey(string encodedKey)
-        {
-            throw new NotImplementedException();
-        }
+        }       
+        public bool IsComplexType { get; init; }
     }
 }

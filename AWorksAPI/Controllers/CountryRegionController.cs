@@ -10,10 +10,10 @@ namespace AWorksAPI.Controllers
 {
 
     [ApiController]
-    public class CountryRegionController : GenericApiController<CountryRegion, int>
+    public class CountryRegionController : GenericApiController<CountryRegion, string>
     {
         public CountryRegionController(AdventureWorksContext context) : base(context)
         { }
-
+      
     }
 }

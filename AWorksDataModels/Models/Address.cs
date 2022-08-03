@@ -11,12 +11,13 @@ using AWorksDataModels.ClassExtensions;
 namespace AWorksDataModels
 {
     
-    public class Address : IBaseEntity<int>, IHaveGuid
+    public class Address : IBaseEntity, IHaveGuid
     {
         private Guid _rowGuid;
         public Address()
         {
             //KeyType = typeof(int);
+            IsComplexType = false;
         }
 
         public int AddressID { get; set; }
@@ -39,13 +40,6 @@ namespace AWorksDataModels
             set { _rowGuid = value; } 
         }
         public DateTime? ModifiedDate { get; set; }
-        public Type KeyType { get; init; }
-
-        public int GetKey(string encodedKey)
-        {
-            int x = 0;
-            int.TryParse(encodedKey.DecodeBase64Url(), out x);
-            return x;
-        }
+        public bool IsComplexType { get; init; }
     }
 }

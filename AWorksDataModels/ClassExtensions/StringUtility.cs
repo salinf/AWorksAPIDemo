@@ -32,8 +32,8 @@ namespace AWorksDataModels.ClassExtensions
         }
         public static string DecodeBase64Url(this string value)
         {
-            var valueBytes = Encoding.UTF8.GetBytes(value);
-            return Convert.ToBase64String(valueBytes).Replace("/", "-").Replace("+", "_").Replace("!", "=");
+            var valueBytes = Convert.FromBase64String(value.Replace("/", "-").Replace("+", "_").Replace("!", "="));
+            return Encoding.UTF8.GetString(valueBytes);
         }
     }
 }

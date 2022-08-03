@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace AWorksDataModels
 {
-    public interface IBaseEntity
-    {        
-        public DateTime? ModifiedDate { get; set; }
-        public bool IsComplexType { get; init; }
-
+    public interface IComplexKey<out T> where T : new()
+    {
+        public Type KeyType { get; init; }
+        public T GetKey(string encodedKey);
     }
 }

@@ -15,10 +15,12 @@ using System.Net.Http;
 namespace AWorksAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class GenericApiController<TEntity, TKey> : ControllerBase where TEntity : class, IBaseEntity<int>, new()
+    public class GenericApiController<TEntity, TKey> : ControllerBase where TEntity : class, IBaseEntity, new()
     {
         private readonly AdventureWorksContext _context;
         private readonly DbSet<TEntity> _dbset;
+
+        public DbSet<TEntity> Set { get => _dbset; }
         public GenericApiController(AdventureWorksContext context)
         {
             _context = context;
@@ -26,23 +28,30 @@ namespace AWorksAPI.Controllers
         }
 
         [HttpGet("{id?}")]
-        public IActionResult Get(int id)
-        {            
+        public virtual IActionResult Get(TKey id)
+        {
+            TEntity entity = new();
+            if (entity.IsComplexType)
+            {
+                //get complex key
+                //else use value type directly below
+            }
             return Ok(_dbset.Find(id));
         }
 
         [HttpGet("{encodedId?}")]
         public IActionResult CompositeGet(string encodedId)
         {
-            int t2 = 2;
-            encodedId = t2.ToString().EncodeBase64Url();
-            TEntity entity = new();
-            var key = entity.GetKey(encodedId);
-            return Ok(_dbset.Find(key));
+            //int t2 = 2;
+            //encodedId = t2.ToString().EncodeBase64Url();
+            //TEntity entity = new();
+            //var key = entity.GetKey(encodedId);
+            //return Ok(_dbset.Find(key));
+            return Ok();
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody]TEntity entity)
+        public virtual IActionResult Put([FromBody]TEntity entity)
         {
             try
             {
@@ -59,7 +68,7 @@ namespace AWorksAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]TEntity entity)
+        public virtual IActionResult Post([FromBody]TEntity entity)
         {
             try
             {
@@ -80,7 +89,7 @@ namespace AWorksAPI.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public virtual IActionResult Delete(TKey id)
         {
             TEntity entity = new TEntity();
 

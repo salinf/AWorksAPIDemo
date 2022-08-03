@@ -5,12 +5,20 @@ using AWorksDataModels.ClassExtensions;
 namespace AWorksDataModels
 {
 
-    public class EmailAddress : IBaseEntity<int>, IHaveGuid
+    public class EmailAddress : IBaseEntity, IHaveGuid, IComplexKey<EmailAddress.eaKey>
     {
+        //public record eaKey (int BusinessEntityId, int EmailAddressId);
+        public record eaKey()
+        {
+            public int BusinessEntityId { get; set; }
+            public int EmailAddressId { get; set; }
+        }
+
         private Guid _rowGuid;
         public EmailAddress()
         {
-            KeyType = typeof(int);
+            //KeyType = typeof(int);
+            IsComplexType = true;
         }
         public int BusinessEntityId { get; set; }
         public int EmailAddressId { get; set; }
@@ -29,11 +37,16 @@ namespace AWorksDataModels
         }
         public DateTime? ModifiedDate { get; set; }
         public Type KeyType { get; init; }
-        public int GetKey(string encodedKey)
+        //public int GetKey(string encodedKey)
+        //{
+        //    int x = 0;
+        //    int.TryParse(encodedKey.DecodeBase64(), out x);
+        //    return x;
+        //}
+        public bool IsComplexType { get; init; }
+        public eaKey GetKey(string encodedKey)
         {
-            int x = 0;
-            int.TryParse(encodedKey.DecodeBase64(), out x);
-            return x;
+            return new eaKey() { BusinessEntityId = 1, EmailAddressId = 1 };
         }
     }
 }

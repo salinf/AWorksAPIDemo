@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AWorksAPIDemo.ORM;
+using AWorksDataModels.ClassExtensions;
 
 namespace AWorksAPIDemo.Controllers
 {
@@ -56,6 +57,10 @@ namespace AWorksAPIDemo.Controllers
             return ret;
         }
 
-        
+        [HttpPut]
+        public string GenerateEncodedKey([FromBody] dynamic JsonStr)
+        {
+            return Convert.ToString(JsonStr).EncodeBase64Url();
+        }
     }
 }
